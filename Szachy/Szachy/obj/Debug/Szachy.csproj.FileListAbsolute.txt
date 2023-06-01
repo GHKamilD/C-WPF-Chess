@@ -1,0 +1,17 @@
+C:\Users\kamil\source\repos\Szachy\Szachy\bin\Debug\Szachy.exe.config
+C:\Users\kamil\source\repos\Szachy\Szachy\bin\Debug\Szachy.exe
+C:\Users\kamil\source\repos\Szachy\Szachy\bin\Debug\Szachy.pdb
+C:\Users\kamil\source\repos\Szachy\Szachy\obj\Debug\Szachy.csproj.AssemblyReference.cache
+C:\Users\kamil\source\repos\Szachy\Szachy\obj\Debug\Szachy.csproj.SuggestedBindingRedirects.cache
+C:\Users\kamil\source\repos\Szachy\Szachy\obj\Debug\MainWindow.g.cs
+C:\Users\kamil\source\repos\Szachy\Szachy\obj\Debug\App.g.cs
+C:\Users\kamil\source\repos\Szachy\Szachy\obj\Debug\Szachy_MarkupCompile.cache
+C:\Users\kamil\source\repos\Szachy\Szachy\obj\Debug\Szachy_MarkupCompile.lref
+C:\Users\kamil\source\repos\Szachy\Szachy\obj\Debug\MainWindow.baml
+C:\Users\kamil\source\repos\Szachy\Szachy\obj\Debug\Szachy.g.resources
+C:\Users\kamil\source\repos\Szachy\Szachy\obj\Debug\Szachy.Properties.Resources.resources
+C:\Users\kamil\source\repos\Szachy\Szachy\obj\Debug\Szachy.csproj.GenerateResource.cache
+C:\Users\kamil\source\repos\Szachy\Szachy\obj\Debug\Szachy.csproj.CoreCompileInputs.cache
+C:\Users\kamil\source\repos\Szachy\Szachy\obj\Debug\Szachy.exe
+C:\Users\kamil\source\repos\Szachy\Szachy\obj\Debug\Szachy.pdb
+C:\Users\kamil\source\repos\Szachy\Szachy\obj\Debug\Szachy_Content.g.cs
