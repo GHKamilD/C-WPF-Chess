@@ -8,7 +8,7 @@ namespace Szachy
 {
     internal class Pionek : Figura
     {
-        public bool czy_poprzednio_podwojny_ruch { get; set; }
+        //public bool czy_poprzednio_podwojny_ruch { get; set; }
         public override bool mozliwe_ruchy(Figura[,] szachownica, System.Windows.Controls.Button[,] podswietlenia)
         {
             bool czy_mozliwe_ruchy = false;

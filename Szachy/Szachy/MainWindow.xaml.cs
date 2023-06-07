@@ -21,7 +21,11 @@ namespace Szachy
     /// </summary>
     public partial class MainWindow : Window
     {
-        
+        Figura[,] szachownica = new Figura[8, 8];
+        Button[,] podswietlenia = new Button[8, 8];
+        bool czy_ruch_bialych = true;
+        List<String> poprzednie_pozycje = new List<String>();
+
         string Generuj_FEN(Figura[,] szachownica, bool czyi_ruch)
         {
             string kod = "";
@@ -137,6 +141,7 @@ namespace Szachy
         }
         Figura[,] generuj_szachownice(string kod)
         {
+            
             Figura[,] szachownica = new Figura[8, 8];
             List<Button> biale_pionki = new List<Button> {Pionek0, Pionek1, Pionek2, Pionek3, Pionek4, Pionek5, Pionek6, Pionek7 };
             List<Button> czarne_pionki = new List<Button> { Pionek8, Pionek9, Pionek10, Pionek11, Pionek12, Pionek13, Pionek14, Pionek15 };
@@ -148,6 +153,18 @@ namespace Szachy
             List<Button> czarne_wieze = new List<Button> { Wieza2, Wieza3 };
             bool czy_uzyty_bialy_hetman = false, czy_uzyty_czarny_hetman = false;
             int i = 0;
+            foreach (Button pion in biale_pionki)
+            {
+                Image img = new Image();
+                img.Source = new BitmapImage(new Uri("Zdjecia\\Pionek_B.png", UriKind.Relative));
+                pion.Content = img;
+            }
+            foreach (Button pion in czarne_pionki)
+            {
+                Image img = new Image();
+                img.Source = new BitmapImage(new Uri("Zdjecia\\Pionek_C.png", UriKind.Relative));
+                pion.Content = img;
+            }
             foreach (char litera in kod)
             {
                 switch (litera)
@@ -155,6 +172,7 @@ namespace Szachy
                     case '/':
                         continue;
                     case 'x':
+                        szachownica[i % 8, i / 8] = null;
                         i++;
                         continue;
                     case 'p':
@@ -186,11 +204,13 @@ namespace Szachy
                         
                         else
                         {
-                            szachownica[i % 8, i / 8] = new Skoczek(false, i % 8, i / 8, biale_pionki[0]);
-                            Canvas.SetTop(biale_pionki[0], 17 + ((i / 8) * 50));
-                            Canvas.SetLeft(biale_pionki[0], 218 + ((i % 8) * 50));
-                            czarne_pionki[0].Content = FindResource("SkoczekC");
-                            czarne_pionki.Remove(biale_pionki[0]);
+                            szachownica[i % 8, i / 8] = new Skoczek(false, i % 8, i / 8, czarne_pionki[0]);
+                            Canvas.SetTop(czarne_pionki[0], 17 + ((i / 8) * 50));
+                            Canvas.SetLeft(czarne_pionki[0], 218 + ((i % 8) * 50));
+                            Image img = new Image();
+                            img.Source = new BitmapImage(new Uri("Zdjecia\\Skoczek_C.png", UriKind.Relative));
+                            czarne_pionki[0].Content = img;
+                            czarne_pionki.Remove(czarne_pionki[0]);
                             i++;
                         }
                         break;
@@ -208,7 +228,9 @@ namespace Szachy
                             szachownica[i % 8, i / 8] = new Skoczek(true, i % 8, i / 8, biale_pionki[0]);
                             Canvas.SetTop(biale_pionki[0], 17 + ((i / 8) * 50));
                             Canvas.SetLeft(biale_pionki[0], 218 + ((i % 8) * 50));
-                            biale_pionki[0].Content = FindResource("SkoczekB");
+                            Image img = new Image();
+                            img.Source = new BitmapImage(new Uri("Zdjecia\\Skoczek_B.png", UriKind.Relative));
+                            biale_pionki[0].Content = img;
                             biale_pionki.Remove(biale_pionki[0]);
                             i++;
                         }
@@ -224,11 +246,13 @@ namespace Szachy
                         }
                         else
                         {
-                            szachownica[i % 8, i / 8] = new Goniec(false, i % 8, i / 8, biale_pionki[0]);
-                            Canvas.SetTop(biale_pionki[0], 17 + ((i / 8) * 50));
-                            Canvas.SetLeft(biale_pionki[0], 218 + ((i % 8) * 50));
-                            czarne_pionki[0].Content = FindResource("GoniecC");
-                            czarne_pionki.Remove(biale_pionki[0]);
+                            szachownica[i % 8, i / 8] = new Goniec(false, i % 8, i / 8, czarne_pionki[0]);
+                            Canvas.SetTop(czarne_pionki[0], 17 + ((i / 8) * 50));
+                            Canvas.SetLeft(czarne_pionki[0], 218 + ((i % 8) * 50));
+                            Image img = new Image();
+                            img.Source = new BitmapImage(new Uri("Zdjecia\\Goniec_C.png", UriKind.Relative));
+                            czarne_pionki[0].Content = img;
+                            czarne_pionki.Remove(czarne_pionki[0]);
                             i++;
                         }
                         break;
@@ -247,7 +271,9 @@ namespace Szachy
                             szachownica[i % 8, i / 8] = new Goniec(true, i % 8, i / 8, biale_pionki[0]);
                             Canvas.SetTop(biale_pionki[0], 17 + ((i / 8) * 50));
                             Canvas.SetLeft(biale_pionki[0], 218 + ((i % 8) * 50));
-                            biale_pionki[0].Content = FindResource("GoniecB");
+                            Image img = new Image();
+                            img.Source = new BitmapImage(new Uri("Zdjecia\\Goniec_B.png", UriKind.Relative));
+                            biale_pionki[0].Content = img;
                             biale_pionki.Remove(biale_pionki[0]);
                             i++;
                         }
@@ -267,7 +293,9 @@ namespace Szachy
                             szachownica[i % 8, i / 8] = new Wieza(false, i % 8, i / 8, czarne_pionki[0]);
                             Canvas.SetTop(czarne_pionki[0], 17 + ((i / 8) * 50));
                             Canvas.SetLeft(czarne_pionki[0], 218 + ((i % 8) * 50));
-                            czarne_pionki[0].Content = FindResource("WiezaC");
+                            Image img = new Image();
+                            img.Source = new BitmapImage(new Uri("Zdjecia\\Wieza_C.png", UriKind.Relative));
+                            czarne_pionki[0].Content = img;
                             czarne_pionki.Remove(czarne_pionki[0]);
                             i++;
                         }
@@ -288,7 +316,9 @@ namespace Szachy
                             szachownica[i % 8, i / 8] = new Wieza(true, i % 8, i / 8, biale_pionki[0]);
                             Canvas.SetTop(biale_pionki[0], 17 + ((i / 8) * 50));
                             Canvas.SetLeft(biale_pionki[0], 218 + ((i % 8) * 50));
-                            biale_pionki[0].Content = FindResource("WiezaB");
+                            Image img = new Image();
+                            img.Source = new BitmapImage(new Uri("Zdjecia\\Wieza_B.png", UriKind.Relative));
+                            biale_pionki[0].Content = img;
                             biale_pionki.Remove(biale_pionki[0]);
                             i++;
                         }
@@ -307,7 +337,9 @@ namespace Szachy
                             szachownica[i % 8, i / 8] = new Hetman(false, i % 8, i / 8, czarne_pionki[0]);
                             Canvas.SetTop(czarne_pionki[0], 17 + ((i / 8) * 50));
                             Canvas.SetLeft(czarne_pionki[0], 218 + ((i % 8) * 50));
-                            czarne_pionki[0].Content = FindResource("WiezaC");
+                            Image img = new Image();
+                            img.Source = new BitmapImage(new Uri("Zdjecia\\Hetman_C.png", UriKind.Relative));
+                            czarne_pionki[0].Content = img;
                             czarne_pionki.Remove(czarne_pionki[0]);
                             i++;
                         }
@@ -326,7 +358,9 @@ namespace Szachy
                             szachownica[i % 8, i / 8] = new Hetman(true, i % 8, i / 8, biale_pionki[0]);
                             Canvas.SetTop(biale_pionki[0], 17 + ((i / 8) * 50));
                             Canvas.SetLeft(biale_pionki[0], 218 + ((i % 8) * 50));
-                            biale_pionki[0].Content = FindResource("HetmanB");
+                            Image img = new Image();
+                            img.Source = new BitmapImage(new Uri("Zdjecia\\Hetman_B.png", UriKind.Relative));
+                            biale_pionki[0].Content = img;
                             biale_pionki.Remove(biale_pionki[0]);
                             i++;
                         }
@@ -383,21 +417,21 @@ namespace Szachy
             }
             return szachownica;
         }
-        Figura test;
-        Figura[,] szachownica = new Figura[8,8];
-        Button[,] podswietlenia = new Button[8,8];
-        bool czy_ruch_bialych=true;
+        
         public MainWindow()
         {
-            //System.Media.SoundPlayer sound = new System.Media.SoundPlayer("FREUDE.wav");
+            
+            //System.Media.SoundPlayer sound = new System.Media.SoundPlayer("FREUDE.wav"), sound2 = new System.Media.SoundPlayer("Europa_League.wav");
+            //List<System.Media.SoundPlayer> sounds = new List<System.Media.SoundPlayer> {sound,sound2 };
+
             //sound.PlayLooping();
             //StreamReader plik2 = new StreamReader("Wznowienie.txt");
             //MessageBox.Show(plik2.ReadLine());
             //plik2.Close();
 
-            Button testy = new Button();
+            //Button testy = new Button();
 
-            Pionek test = new Pionek(true, 0, 6);
+            //Pionek test = new Pionek(true, 0, 6);
             InitializeComponent();
             podswietlenia[0, 7] = pole1;
             podswietlenia[1, 7] = pole2;
@@ -463,38 +497,7 @@ namespace Szachy
             podswietlenia[5, 0] = pole62;
             podswietlenia[6, 0] = pole63;
             podswietlenia[7, 0] = pole64;
-            szachownica[0, 6] = new Pionek(true, 0, 6, Pionek0);
-            szachownica[1, 6] = new Pionek(true, 1, 6, Pionek1);
-            szachownica[2, 6] = new Pionek(true, 2, 6, Pionek2);
-            szachownica[3, 6] = new Pionek(true, 3, 6, Pionek3);
-            szachownica[4, 6] = new Pionek(true, 4, 6, Pionek4);
-            szachownica[5, 6] = new Pionek(true, 5, 6, Pionek5);
-            szachownica[6, 6] = new Pionek(true, 6, 6, Pionek6);
-            szachownica[7, 6] = new Pionek(true, 7, 6, Pionek7);
-            szachownica[0, 1] = new Pionek(false, 0, 1, Pionek8);
-            szachownica[1, 1] = new Pionek(false, 1, 1, Pionek9);
-            szachownica[2, 1] = new Pionek(false, 2, 1, Pionek10);
-            szachownica[3, 1] = new Pionek(false, 3, 1, Pionek11);
-            szachownica[4, 1] = new Pionek(false, 4, 1, Pionek12);
-            szachownica[5, 1] = new Pionek(false, 5, 1, Pionek13);
-            szachownica[6, 1] = new Pionek(false, 6, 1, Pionek14);
-            szachownica[7, 1] = new Pionek(false, 7, 1, Pionek15);
-            szachownica[1, 7] = new Skoczek(true, 1, 7, Skoczek0);
-            szachownica[6, 7] = new Skoczek(true, 6, 7, Skoczek1);
-            szachownica[2, 7] = new Goniec(true, 2, 7, Goniec0);
-            szachownica[5, 7] = new Goniec(true, 5, 7, Goniec1);
-            szachownica[2, 0] = new Goniec(false, 2, 0, Goniec2);
-            szachownica[5, 0] = new Goniec(false, 5, 0, Goniec3);
-            szachownica[0, 7] = new Wieza(true, 0, 7, Wieza0);
-            szachownica[7, 7] = new Wieza(true, 7, 7, Wieza1);
-            szachownica[3, 0] = new Hetman(false, 3, 0, Hetman1);
-            szachownica[4, 7] = new Krol(true, 4, 7, Krol0);
-            szachownica[4, 0] = new Krol(false, 4, 0, Krol1);
-            szachownica[0, 0] = new Wieza(false, 0, 0, Wieza3);
-            szachownica[7, 0] = new Wieza(false, 7, 0, Wieza2);
-            szachownica[1, 0] = new Skoczek(false, 1, 0, Skoczek2);
-            szachownica[6, 0] = new Skoczek(false, 6, 0, Skoczek3);
-            szachownica[3, 7] = new Hetman(true, 3, 7, Hetman0);
+            
 
         }
 
@@ -506,13 +509,7 @@ namespace Szachy
                 for (int j = 0; j < 8; j++)
                 {
                     podswietlenia[i, j].Visibility = Visibility.Hidden;
-                }
-            }
-            for (int i=0; i<8; i++)
-            {
-                for(int j=0; j<8; j++)
-                {
-                    if(szachownica[i,j]!=null)
+                    if (szachownica[i, j] != null)
                     {
                         szachownica[i, j].czy_zaznaczone = false;
                     }
@@ -569,8 +566,16 @@ namespace Szachy
 
         private void pole2_Click(object sender, RoutedEventArgs e)
         {
-            
+            int ilosc_figur = 0;
             double top, left;
+            for(int i=0; i<8; i++)
+            {
+                for(int j=0; j<8; j++)
+                {
+                    if (szachownica[i, j] != null)
+                        ilosc_figur++;
+                }
+            }
             for (int i = 0; i<8; i++)
             {
                 for (int j = 0; j < 8; j++)
@@ -623,6 +628,7 @@ namespace Szachy
                         }
                         else if (szachownica[i, j].GetType()==typeof(Pionek))
                         {
+                            poprzednie_pozycje = new List<string>();
                             if(szachownica[i, j].kolor == true)
                             {
                                 
@@ -741,18 +747,18 @@ namespace Szachy
                                     {
                                         if(b==0)
                                         {
-                                            szachownica[a, b] = new Hetman(true, a, b, szachownica[a, b].obiekt);
+                                            /*szachownica[a, b] = new Hetman(true, a, b, szachownica[a, b].obiekt);
                                             szachownica[a, b].czy_zaznaczone = true;
-                                            szachownica[a, b].obiekt.Content = FindResource("HetmanB");
+                                            szachownica[a, b].obiekt.Content = FindResource("HetmanB");*/
                                             promocja.Visibility = Visibility.Visible;
                                             return;
                                             //goto koniec;
                                         }
                                         if(b==7)
                                         {
-                                            szachownica[a, b] = new Hetman(false, a, b, szachownica[a, b].obiekt);
+                                            /*szachownica[a, b] = new Hetman(false, a, b, szachownica[a, b].obiekt);
                                             szachownica[a, b].czy_zaznaczone = true;
-                                            szachownica[a, b].obiekt.Content = FindResource("HetmanC");
+                                            szachownica[a, b].obiekt.Content = FindResource("HetmanC");*/
                                             promocja.Visibility = Visibility.Visible;
                                             return;
                                             //goto koniec;
@@ -781,6 +787,18 @@ namespace Szachy
                 }
             }
             no_petla:
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (szachownica[i, j] != null)
+                        ilosc_figur--;
+                }
+            }
+            if(ilosc_figur > 0)
+            {
+                poprzednie_pozycje = new List<string>();
+            }
             foreach (var przycisk in Plansza.Children.OfType<Button>())
             {
                 przycisk.Visibility=Visibility.Hidden;
@@ -797,11 +815,63 @@ namespace Szachy
                 }
             }
             czy_ruch_bialych = !czy_ruch_bialych;
-            string kod = Generuj_FEN(szachownica,czy_ruch_bialych);
+            string kod = Generuj_FEN(szachownica,czy_ruch_bialych),wszystkie_pozycje="";
+            poprzednie_pozycje.Add(kod);
+            //MessageBox.Show(poprzednie_pozycje[0]);
             StreamWriter plik = new StreamWriter("Wznowienie.txt");
             plik.WriteLine(kod);
+            foreach (string pozycje in poprzednie_pozycje)
+            {
+                //MessageBox.Show(pozycje);
+                wszystkie_pozycje += pozycje + " ";
+            }
+            plik.WriteLine(wszystkie_pozycje);
             plik.Close();
-            
+            if(poprzednie_pozycje.Count==100)
+            {
+                Remis.Visibility = Visibility.Visible;
+                string poczatek = "wsghkgsw/pppppppp/xxxxxxxx/xxxxxxxx/xxxxxxxx/xxxxxxxx/PPPPPPPP/WSGHKGSW/bQRqr";
+                plik = new StreamWriter("Wznowienie.txt");
+                plik.WriteLine(poczatek);
+                plik.WriteLine(poczatek);
+                plik.Close();
+                for (int i = 0; i < 8; i++)
+                {
+                    for (int j = 0; j < 8; j++)
+                    {
+                        podswietlenia[i, j].Visibility = Visibility.Hidden;
+                    }
+                }
+                return;
+            }
+            for (int i = 0; i < poprzednie_pozycje.Count; i++)
+            {
+                int ilosc_powtorzen = 1;
+                for (int j = i+1; j < poprzednie_pozycje.Count; j++)
+                {
+                    if(poprzednie_pozycje[i]==poprzednie_pozycje[j])
+                    {
+                        ilosc_powtorzen++;
+                        if(ilosc_powtorzen==3)
+                        {
+                            Remis.Visibility = Visibility.Visible;
+                            string poczatek = "wsghkgsw/pppppppp/xxxxxxxx/xxxxxxxx/xxxxxxxx/xxxxxxxx/PPPPPPPP/WSGHKGSW/bQRqr";
+                            plik = new StreamWriter("Wznowienie.txt");
+                            plik.WriteLine(poczatek);
+                            plik.WriteLine(poczatek);
+                            plik.Close();
+                            for (int a = 0; a < 8; a++)
+                            {
+                                for (int b = 0; b < 8; b++)
+                                {
+                                    podswietlenia[a, b].Visibility = Visibility.Hidden;
+                                }
+                            }
+                            return;
+                        }
+                    }
+                }
+            }
             bool czy_sa_ruchy = false;
             for(int i=0; i<8; i++)
             {
@@ -816,6 +886,7 @@ namespace Szachy
             }
             if(!czy_sa_ruchy)
             {
+                poprzednie_pozycje = new List<string>();
                 for (int i = 0; i < 8; i++)
                 {
                     for (int j = 0; j < 8; j++)
@@ -824,19 +895,29 @@ namespace Szachy
                         {
                             if(szachownica[i,j].czy_krol_szachowany(szachownica))
                             {
-                                testing.Visibility = Visibility.Visible;
+                                //testing.Visibility = Visibility.Visible;
                                 string poczatek = "wsghkgsw/pppppppp/xxxxxxxx/xxxxxxxx/xxxxxxxx/xxxxxxxx/PPPPPPPP/WSGHKGSW/bQRqr";
                                 plik = new StreamWriter("Wznowienie.txt");
                                 plik.WriteLine(poczatek);
+                                plik.WriteLine(poczatek);
                                 plik.Close();
+                                if(!czy_ruch_bialych)
+                                {
+                                    Wygrana_bialych.Visibility = Visibility.Visible;
+                                }
+                                else
+                                {
+                                    Wygrana_czarnych.Visibility = Visibility.Visible;
+                                }
                             }
                             else
-                            {
-                                testing1.Visibility = Visibility.Visible;
+                            { 
                                 string poczatek = "wsghkgsw/pppppppp/xxxxxxxx/xxxxxxxx/xxxxxxxx/xxxxxxxx/PPPPPPPP/WSGHKGSW/bQRqr";
                                 plik = new StreamWriter("Wznowienie.txt");
                                 plik.WriteLine(poczatek);
+                                plik.WriteLine(poczatek);
                                 plik.Close();
+                                Remis.Visibility = Visibility.Visible;
                             }
                             break;
                         }
@@ -850,7 +931,6 @@ namespace Szachy
                     podswietlenia[i, j].Visibility = Visibility.Hidden;
                 }
             }
-        koniec:
             { }
         }
        
@@ -881,12 +961,145 @@ namespace Szachy
                     }
                 }
             }
+            poprzednia_gra = wczytywanie.ReadLine();
+            string[] lista_pozycji = poprzednia_gra.Split(' ');
+            foreach(string pozycja in lista_pozycji)
+            {
+                poprzednie_pozycje.Add(pozycja);
+            }
+            poprzednie_pozycje.Remove(" ");
+            /*if(string.IsNullOrEmpty(poprzednia_gra))
+            {
+                MessageBox.Show("Hello");
+            }*/
             wczytywanie.Close();
             Ekran_Startowy.Visibility = Visibility.Hidden;
         }
 
         private void Start_Click(object sender, RoutedEventArgs e)
         {
+            szachownica = generuj_szachownice("wsghkgsw/pppppppp/xxxxxxxx/xxxxxxxx/xxxxxxxx/xxxxxxxx/PPPPPPPP/WSGHKGSW/bQRqr");
+            foreach (var przycisk in Plansza.Children.OfType<Button>())
+            {
+                przycisk.Visibility = Visibility.Hidden;
+            }
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (szachownica[i, j] != null && szachownica[i, j].obiekt != null)
+                    {
+                        szachownica[i, j].czy_zaznaczone = false;
+                        szachownica[i, j].obiekt.Visibility = Visibility.Visible;
+                    }
+                }
+            }
+            Wygrana_bialych.Visibility = Visibility.Hidden;
+            Wygrana_czarnych.Visibility = Visibility.Hidden;
+            /*Canvas.SetTop(Pionek0, 317);
+            Canvas.SetLeft(Pionek0, 218);
+            Canvas.SetTop(Pionek1, 317);
+            Canvas.SetLeft(Pionek1, 268);
+            Canvas.SetTop(Pionek2, 317);
+            Canvas.SetLeft(Pionek2, 318);
+            Canvas.SetTop(Pionek3, 317);
+            Canvas.SetLeft(Pionek3, 368);
+            Canvas.SetTop(Pionek4, 317);
+            Canvas.SetLeft(Pionek4, 418);
+            Canvas.SetTop(Pionek5, 317);
+            Canvas.SetLeft(Pionek5, 468);
+            Canvas.SetTop(Pionek6, 317);
+            Canvas.SetLeft(Pionek6, 518);
+            Canvas.SetTop(Pionek7, 317);
+            Canvas.SetLeft(Pionek7, 568);
+            Canvas.SetTop(Pionek8, 67);
+            Canvas.SetLeft(Pionek8, 218);
+            Canvas.SetTop(Pionek9, 67);
+            Canvas.SetLeft(Pionek9, 268);
+            Canvas.SetTop(Pionek10, 67);
+            Canvas.SetLeft(Pionek10, 318);
+            Canvas.SetTop(Pionek11, 67);
+            Canvas.SetLeft(Pionek11, 368);
+            Canvas.SetTop(Pionek12, 67);
+            Canvas.SetLeft(Pionek12, 418);
+            Canvas.SetTop(Pionek13, 67);
+            Canvas.SetLeft(Pionek13, 468);
+            Canvas.SetTop(Pionek14, 67);
+            Canvas.SetLeft(Pionek14, 518);
+            Canvas.SetTop(Pionek15, 67);
+            Canvas.SetLeft(Pionek15, 568);
+            Canvas.SetTop(Skoczek0, 367);
+            Canvas.SetLeft(Skoczek0, 268);
+            Canvas.SetTop(Skoczek1, 367);
+            Canvas.SetLeft(Skoczek1, 518);
+            Canvas.SetTop(Skoczek2, 17);
+            Canvas.SetLeft(Skoczek2, 268);
+            Canvas.SetTop(Skoczek3, 17);
+            Canvas.SetLeft(Skoczek3, 518);
+            Canvas.SetTop(Goniec0, 367);
+            Canvas.SetLeft(Goniec0, 318);
+            Canvas.SetTop(Goniec1, 367);
+            Canvas.SetLeft(Goniec1, 468);
+            Canvas.SetTop(Goniec2, 17);
+            Canvas.SetLeft(Goniec2, 318);
+            Canvas.SetTop(Goniec3, 17);
+            Canvas.SetLeft(Goniec3, 468);
+            Canvas.SetTop(Wieza0, 367);
+            Canvas.SetLeft(Wieza0, 218);
+            Canvas.SetTop(Wieza1, 367);
+            Canvas.SetLeft(Wieza1, 568);
+            Canvas.SetTop(Wieza3, 17);
+            Canvas.SetLeft(Wieza3, 218);
+            Canvas.SetTop(Wieza2, 17);
+            Canvas.SetLeft(Wieza2, 568);
+            Canvas.SetTop(Hetman0, 367);
+            Canvas.SetLeft(Hetman0, 368);
+            Canvas.SetTop(Hetman1, 17);
+            Canvas.SetLeft(Hetman1, 368);
+            Canvas.SetTop(Krol0, 367);
+            Canvas.SetLeft(Krol0, 418);
+            Canvas.SetTop(Krol1, 17);
+            Canvas.SetLeft(Krol1, 418);
+            for(int i = 0; i<8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    szachownica[i, j] = null;
+                }
+            }
+            szachownica[0, 6] = new Pionek(true, 0, 6, Pionek0);
+            szachownica[1, 6] = new Pionek(true, 1, 6, Pionek1);
+            szachownica[2, 6] = new Pionek(true, 2, 6, Pionek2);
+            szachownica[3, 6] = new Pionek(true, 3, 6, Pionek3);
+            szachownica[4, 6] = new Pionek(true, 4, 6, Pionek4);
+            szachownica[5, 6] = new Pionek(true, 5, 6, Pionek5);
+            szachownica[6, 6] = new Pionek(true, 6, 6, Pionek6);
+            szachownica[7, 6] = new Pionek(true, 7, 6, Pionek7);
+            szachownica[0, 1] = new Pionek(false, 0, 1, Pionek8);
+            szachownica[1, 1] = new Pionek(false, 1, 1, Pionek9);
+            szachownica[2, 1] = new Pionek(false, 2, 1, Pionek10);
+            szachownica[3, 1] = new Pionek(false, 3, 1, Pionek11);
+            szachownica[4, 1] = new Pionek(false, 4, 1, Pionek12);
+            szachownica[5, 1] = new Pionek(false, 5, 1, Pionek13);
+            szachownica[6, 1] = new Pionek(false, 6, 1, Pionek14);
+            szachownica[7, 1] = new Pionek(false, 7, 1, Pionek15);
+            szachownica[1, 7] = new Skoczek(true, 1, 7, Skoczek0);
+            szachownica[6, 7] = new Skoczek(true, 6, 7, Skoczek1);
+            szachownica[2, 7] = new Goniec(true, 2, 7, Goniec0);
+            szachownica[5, 7] = new Goniec(true, 5, 7, Goniec1);
+            szachownica[2, 0] = new Goniec(false, 2, 0, Goniec2);
+            szachownica[5, 0] = new Goniec(false, 5, 0, Goniec3);
+            szachownica[0, 7] = new Wieza(true, 0, 7, Wieza0);
+            szachownica[7, 7] = new Wieza(true, 7, 7, Wieza1);
+            szachownica[3, 0] = new Hetman(false, 3, 0, Hetman1);
+            szachownica[4, 7] = new Krol(true, 4, 7, Krol0);
+            szachownica[4, 0] = new Krol(false, 4, 0, Krol1);
+            szachownica[0, 0] = new Wieza(false, 0, 0, Wieza3);
+            szachownica[7, 0] = new Wieza(false, 7, 0, Wieza2);
+            szachownica[1, 0] = new Skoczek(false, 1, 0, Skoczek2);
+            szachownica[6, 0] = new Skoczek(false, 6, 0, Skoczek3);
+            szachownica[3, 7] = new Hetman(true, 3, 7, Hetman0);*/
+            poprzednie_pozycje.Add("wsghkgsw/pppppppp/xxxxxxxx/xxxxxxxx/xxxxxxxx/xxxxxxxx/PPPPPPPP/WSGHKGSW/bQRqr");
             Ekran_Startowy.Visibility = Visibility.Hidden;
         }
 
@@ -906,15 +1119,17 @@ namespace Szachy
                         if(szachownica[i,j].kolor)
                         {
                             szachownica[i, j] = new Hetman(true, i, j, szachownica[i, j].obiekt);
-                            szachownica[i, j].obiekt.Content = FindResource("HetmanB");
-                            MessageBox.Show(szachownica[i, j].GetType().ToString());
+                            Image img = new Image();
+                            img.Source = new BitmapImage(new Uri("Zdjecia\\Hetman_B.png", UriKind.Relative));
+                            szachownica[i, j].obiekt.Content = img;
                             goto koniec_petli;
                         }
                         else
                         {
                             szachownica[i, j] = new Hetman(false, i, j, szachownica[i, j].obiekt);
-                            szachownica[i, j].obiekt.Content = FindResource("HetmanC");
-                            MessageBox.Show(szachownica[i, j].GetType().ToString());
+                            Image img = new Image();
+                            img.Source = new BitmapImage(new Uri("Zdjecia\\Hetman_C.png", UriKind.Relative));
+                            szachownica[i, j].obiekt.Content = img;
                             goto koniec_petli;
                         }
                     }
@@ -964,19 +1179,28 @@ namespace Szachy
                         {
                             if (szachownica[i, j].czy_krol_szachowany(szachownica))
                             {
-                                testing.Visibility = Visibility.Visible;
                                 string poczatek = "wsghkgsw/pppppppp/xxxxxxxx/xxxxxxxx/xxxxxxxx/xxxxxxxx/PPPPPPPP/WSGHKGSW/bQRqr";
                                 plik = new StreamWriter("Wznowienie.txt");
                                 plik.WriteLine(poczatek);
+                                plik.WriteLine(poczatek);
                                 plik.Close();
+                                if (!czy_ruch_bialych)
+                                {
+                                    Wygrana_bialych.Visibility = Visibility.Visible;
+                                }
+                                else
+                                {
+                                    Wygrana_czarnych.Visibility = Visibility.Visible;
+                                }
                             }
                             else
                             {
-                                testing1.Visibility = Visibility.Visible;
                                 string poczatek = "wsghkgsw/pppppppp/xxxxxxxx/xxxxxxxx/xxxxxxxx/xxxxxxxx/PPPPPPPP/WSGHKGSW/bQRqr";
                                 plik = new StreamWriter("Wznowienie.txt");
                                 plik.WriteLine(poczatek);
+                                plik.WriteLine(poczatek);
                                 plik.Close();
+                                Remis.Visibility = Visibility.Visible;
                             }
                             break;
                         }
@@ -1004,15 +1228,17 @@ namespace Szachy
                         if (szachownica[i, j].kolor)
                         {
                             szachownica[i, j] = new Skoczek(true, i, j, szachownica[i, j].obiekt);
-                            szachownica[i, j].obiekt.Content = FindResource("SkoczekB");
-                            MessageBox.Show(szachownica[i, j].GetType().ToString());
+                            Image img = new Image();
+                            img.Source = new BitmapImage(new Uri("Zdjecia\\Skoczek_B.png", UriKind.Relative));
+                            szachownica[i, j].obiekt.Content = img;
                             goto koniec_petli;
                         }
                         else
                         {
                             szachownica[i, j] = new Skoczek(false, i, j, szachownica[i, j].obiekt);
-                            szachownica[i, j].obiekt.Content = FindResource("SkoczekC");
-                            MessageBox.Show(szachownica[i, j].GetType().ToString());
+                            Image img = new Image();
+                            img.Source = new BitmapImage(new Uri("Zdjecia\\Skoczek_C.png", UriKind.Relative));
+                            szachownica[i, j].obiekt.Content = img;
                             goto koniec_petli;
                         }
                     }
@@ -1062,19 +1288,28 @@ namespace Szachy
                         {
                             if (szachownica[i, j].czy_krol_szachowany(szachownica))
                             {
-                                testing.Visibility = Visibility.Visible;
                                 string poczatek = "wsghkgsw/pppppppp/xxxxxxxx/xxxxxxxx/xxxxxxxx/xxxxxxxx/PPPPPPPP/WSGHKGSW/bQRqr";
                                 plik = new StreamWriter("Wznowienie.txt");
                                 plik.WriteLine(poczatek);
+                                plik.WriteLine(poczatek);
                                 plik.Close();
+                                if (!czy_ruch_bialych)
+                                {
+                                    Wygrana_bialych.Visibility = Visibility.Visible;
+                                }
+                                else
+                                {
+                                    Wygrana_czarnych.Visibility = Visibility.Visible;
+                                }
                             }
                             else
                             {
-                                testing1.Visibility = Visibility.Visible;
                                 string poczatek = "wsghkgsw/pppppppp/xxxxxxxx/xxxxxxxx/xxxxxxxx/xxxxxxxx/PPPPPPPP/WSGHKGSW/bQRqr";
                                 plik = new StreamWriter("Wznowienie.txt");
                                 plik.WriteLine(poczatek);
+                                plik.WriteLine(poczatek);
                                 plik.Close();
+                                Remis.Visibility = Visibility.Visible;
                             }
                             break;
                         }
@@ -1102,15 +1337,17 @@ namespace Szachy
                         if (szachownica[i, j].kolor)
                         {
                             szachownica[i, j] = new Wieza(true, i, j, szachownica[i, j].obiekt);
-                            szachownica[i, j].obiekt.Content = FindResource("WiezaB");
-                            MessageBox.Show(szachownica[i, j].GetType().ToString());
+                            Image img = new Image();
+                            img.Source = new BitmapImage(new Uri("Zdjecia\\Wieza_B.png", UriKind.Relative));
+                            szachownica[i, j].obiekt.Content = img;
                             goto koniec_petli;
                         }
                         else
                         {
                             szachownica[i, j] = new Wieza(false, i, j, szachownica[i, j].obiekt);
-                            szachownica[i, j].obiekt.Content = FindResource("WiezaC");
-                            MessageBox.Show(szachownica[i, j].GetType().ToString());
+                            Image img = new Image();
+                            img.Source = new BitmapImage(new Uri("Zdjecia\\Wieza_C.png", UriKind.Relative));
+                            szachownica[i, j].obiekt.Content = img;
                             goto koniec_petli;
                         }
                     }
@@ -1160,19 +1397,28 @@ namespace Szachy
                         {
                             if (szachownica[i, j].czy_krol_szachowany(szachownica))
                             {
-                                testing.Visibility = Visibility.Visible;
                                 string poczatek = "wsghkgsw/pppppppp/xxxxxxxx/xxxxxxxx/xxxxxxxx/xxxxxxxx/PPPPPPPP/WSGHKGSW/bQRqr";
                                 plik = new StreamWriter("Wznowienie.txt");
                                 plik.WriteLine(poczatek);
+                                plik.WriteLine(poczatek);
                                 plik.Close();
+                                if (!czy_ruch_bialych)
+                                {
+                                    Wygrana_bialych.Visibility = Visibility.Visible;
+                                }
+                                else
+                                {
+                                    Wygrana_czarnych.Visibility = Visibility.Visible;
+                                }
                             }
                             else
                             {
-                                testing1.Visibility = Visibility.Visible;
                                 string poczatek = "wsghkgsw/pppppppp/xxxxxxxx/xxxxxxxx/xxxxxxxx/xxxxxxxx/PPPPPPPP/WSGHKGSW/bQRqr";
                                 plik = new StreamWriter("Wznowienie.txt");
                                 plik.WriteLine(poczatek);
+                                plik.WriteLine(poczatek);
                                 plik.Close();
+                                Remis.Visibility = Visibility.Visible;
                             }
                             break;
                         }
@@ -1200,15 +1446,18 @@ namespace Szachy
                         if (szachownica[i, j].kolor)
                         {
                             szachownica[i, j] = new Goniec(true, i, j, szachownica[i, j].obiekt);
-                            szachownica[i, j].obiekt.Content = FindResource("GoniecB");
-                            MessageBox.Show(szachownica[i, j].GetType().ToString());
+                            Image img = new Image();
+                            img.Source = new BitmapImage(new Uri("Zdjecia\\Goniec_B.png",UriKind.Relative));
+                            szachownica[i, j].obiekt.Content = img;
+                            //szachownica[i, j].obiekt.Content = FindResource("GoniecB");
                             goto koniec_petli;
                         }
                         else
                         {
                             szachownica[i, j] = new Goniec(false, i, j, szachownica[i, j].obiekt);
-                            szachownica[i, j].obiekt.Content = FindResource("GoniecC");
-                            MessageBox.Show(szachownica[i, j].GetType().ToString());
+                            Image img = new Image();
+                            img.Source = new BitmapImage(new Uri("Zdjecia\\Goniec_C.png", UriKind.Relative));
+                            szachownica[i, j].obiekt.Content = img;
                             goto koniec_petli;
                         }
                     }
@@ -1258,19 +1507,28 @@ namespace Szachy
                         {
                             if (szachownica[i, j].czy_krol_szachowany(szachownica))
                             {
-                                testing.Visibility = Visibility.Visible;
                                 string poczatek = "wsghkgsw/pppppppp/xxxxxxxx/xxxxxxxx/xxxxxxxx/xxxxxxxx/PPPPPPPP/WSGHKGSW/bQRqr";
                                 plik = new StreamWriter("Wznowienie.txt");
                                 plik.WriteLine(poczatek);
+                                plik.WriteLine(poczatek);
                                 plik.Close();
+                                if (!czy_ruch_bialych)
+                                {
+                                    Wygrana_bialych.Visibility = Visibility.Visible;
+                                }
+                                else
+                                {
+                                    Wygrana_czarnych.Visibility = Visibility.Visible;
+                                }
                             }
                             else
                             {
-                                testing1.Visibility = Visibility.Visible;
                                 string poczatek = "wsghkgsw/pppppppp/xxxxxxxx/xxxxxxxx/xxxxxxxx/xxxxxxxx/PPPPPPPP/WSGHKGSW/bQRqr";
                                 plik = new StreamWriter("Wznowienie.txt");
                                 plik.WriteLine(poczatek);
+                                plik.WriteLine(poczatek);
                                 plik.Close();
+                                Remis.Visibility = Visibility.Visible;
                             }
                             break;
                         }
@@ -1286,5 +1544,14 @@ namespace Szachy
             }
             promocja.Visibility = Visibility.Hidden;
         }
+
+        private void Powrot_Click(object sender, RoutedEventArgs e)
+        {
+            Ekran_Startowy.Visibility = Visibility.Visible;
+            Wygrana_bialych.Visibility = Visibility.Hidden;
+            Wygrana_czarnych.Visibility = Visibility.Hidden;
+            Remis.Visibility = Visibility.Hidden;
+        }
     }
+
 }

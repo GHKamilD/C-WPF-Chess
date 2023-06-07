@@ -18,7 +18,6 @@ namespace Szachy
         public int pole_y;
         virtual public bool mozliwe_ruchy(Figura[,] tablica, System.Windows.Controls.Button[,] podswietlenia)
         {
-            
             return false;
             //podswietlenia[0,0].Visibility=System.Windows.Visibility.Visible;
         }

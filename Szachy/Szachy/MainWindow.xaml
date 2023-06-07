@@ -2,6 +2,7 @@
         ResizeMode="CanMinimize"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Icon="pionek_b_Yi9_icon.ico"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Szachy"
@@ -78,7 +79,7 @@
 
         </Grid>
         <Button x:Name="Pionek1" Width="50" Height="50" Background="Transparent" BorderThickness="0" Canvas.Left="268" Canvas.Top="317" Click="Pionek0_Click_1" HorizontalAlignment="Center" VerticalAlignment="Top">
-            <Image Source="Zdjecia/Pionek_B.png" Width="43" Height="43"></Image>
+            <Image x:Name="Zdjecie_pionek1" Source="Zdjecia\Pionek_B.png" Width="43" Height="43"></Image>
         </Button>
         <Button x:Name="Pionek0" Width="50" Height="50" Background="Transparent" BorderThickness="0" Canvas.Left="218" Canvas.Top="317" Click="Pionek0_Click_1" HorizontalAlignment="Left" VerticalAlignment="Center">
             <Image Source="Zdjecia/Pionek_B.png" Width="42" Height="43"></Image>
@@ -244,7 +245,7 @@
             <Button x:Name="Start" Margin="263,169,263,168" Content="Nowa gra" Background="Beige" Foreground="Black" Click="Start_Click"></Button>
             <Button x:Name="Wyjdz" Margin="263,256,263,81" Content="Wyjdź" Background="SaddleBrown" Foreground="White" Click="Wyjdz_Click"></Button>
         </Grid>
-        <Grid x:Name="promocja" Opacity="0.4" Background="White" Width="800" Height="424" Canvas.Top="0" Canvas.Left="0" Visibility="Hidden">
+        <Grid x:Name="promocja" Opacity="0.7" Background="White" Width="800" Height="424" Canvas.Top="0" Canvas.Left="0" Visibility="Hidden">
             <Button x:Name="Guzik_Hetman" Width="50" Height="50" Margin="122,35,628,339" Click="Guzik_Hetman_Click">
                 <Image Source="Zdjecia/Hetman_B.png"></Image>
             </Button>
@@ -256,6 +257,24 @@
             </Button>
             <Button x:Name="Guzik_Goniec" Width="50" Height="50" Margin="122,185,628,189" Click="Guzik_Goniec_Click">
                 <Image Source="Zdjecia/Goniec_B.png"></Image>
+            </Button>
+        </Grid>
+        <Grid x:Name="Wygrana_bialych" Width="800" Height="424" Background="White" Visibility="Hidden" Opacity="0.7">
+            <Label Content="Mat. Wygrana Białych" Margin="99,58,99,279" FontSize="50" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+            <Button x:Name="Start2" Margin="652,270,52,67" Background="White" Foreground="Black" Click="Powrot_Click" BorderThickness="0">
+                <Image Source="Zdjecia/return.png"></Image>
+            </Button>
+        </Grid>
+        <Grid x:Name="Wygrana_czarnych" Width="800" Height="424" Background="White" Visibility="Hidden" Opacity="0.7">
+            <Label Content="Mat. Wygrana Czarnych" Margin="99,58,99,279" FontSize="50" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+            <Button x:Name="Start3" Margin="652,270,52,67" Background="White" Foreground="Black" BorderThickness="0" Click="Powrot_Click">
+                <Image Source="Zdjecia/return.png"></Image>
+            </Button>
+        </Grid>
+        <Grid x:Name="Remis" Width="800" Height="424" Background="White" Visibility="Hidden" Opacity="0.7">
+            <Label Content="Remis." Margin="99,58,99,279" FontSize="60" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+            <Button x:Name="Start4" Margin="652,270,52,67" Background="White" Foreground="Black" BorderThickness="0" Click="Powrot_Click">
+                <Image Source="Zdjecia/return.png"></Image>
             </Button>
         </Grid>
     </Canvas>

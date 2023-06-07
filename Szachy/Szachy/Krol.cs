@@ -330,6 +330,7 @@ namespace Szachy
                                 czy_mozliwe_ruchy = true;
                             }
                         }
+                        szachownica[2, 0] = null;
                         szachownica[3, 0] = null;
                     }
                     if(szachownica[7, 0] != null && szachownica[7, 0].czy_nie_wykonal_ruchu == true && szachownica[6, 0] == null && szachownica[5, 0] == null)
@@ -345,6 +346,7 @@ namespace Szachy
                                 czy_mozliwe_ruchy = true;
                             }
                         }
+                        szachownica[6, 0] = null;
                         szachownica[5, 0] = null;
                     }
                     

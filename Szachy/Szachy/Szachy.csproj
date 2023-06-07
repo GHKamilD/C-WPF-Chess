@@ -114,7 +114,9 @@
     <Resource Include="Zdjecia\Skoczek_B.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Zdjecia\Goniec_B.png" />
+    <Resource Include="Zdjecia\Goniec_B.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Zdjecia\Goniec_C.png" />
@@ -139,11 +141,14 @@
   <ItemGroup>
     <Resource Include="pomocy.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pliki_tekstowe\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="FREUDE.wav" />
+    <Resource Include="pionek_b_Yi9_icon.ico" />
+    <Resource Include="Goniec_B.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Zdjecia\return.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
