@@ -6,17 +6,19 @@ using System.Threading.Tasks;
 
 namespace Szachy
 {
-    internal class Hetman: Figura
+    internal class Hetman: Figura //Klasa reprezentująca na szachownicy hetmana dziedzicząca po klasie Figura
     {
         public override bool mozliwe_ruchy(Figura[,] szachownica, System.Windows.Controls.Button[,] podswietlenia)
         {
             bool czy_szach = false, czy_mozliwe_ruchy = false;
             int i = 1;
+            //Sprawdzanie możliwych ruchów poziomo w prawo
             while (this.pole_x + i >= 0 && this.pole_x + i < 8)
             {
                 Figura pom = szachownica[this.pole_x + i, this.pole_y], pom2 = this;
                 szachownica[this.pole_x + i, this.pole_y] = this;
                 szachownica[this.pole_x, this.pole_y] = null;
+                //Pętla sprawdzająca, czy dany ruch nie sprawi, że król o tym samym kolorze co figura nie będzie szachowany
                 for (int a = 0; a < 8; a++)
                 {
                     for (int b = 0; b < 8; b++)
@@ -53,18 +55,9 @@ namespace Szachy
                 }
 
                 i++;
-                /*if (szachownica[this.pole_x + i, this.pole_y] != null)
-                {
-                    if (szachownica[this.pole_x + i, this.pole_y].kolor != this.kolor)
-                    {
-                        podswietlenia[this.pole_x + i, this.pole_y].Visibility = System.Windows.Visibility.Visible;
-                    }
-                    break;
-                }
-                podswietlenia[this.pole_x + i, this.pole_y].Visibility = System.Windows.Visibility.Visible;
-                i++;*/
             }
             i = 1;
+            //Sprawdzanie możliwych ruchów pionowo w górę
             while (this.pole_y - i >= 0 && this.pole_y - i < 8)
             {
                 Figura pom = szachownica[this.pole_x, this.pole_y - i], pom2 = this;
@@ -106,18 +99,9 @@ namespace Szachy
                 }
 
                 i++;
-                /*if (szachownica[this.pole_x, this.pole_y - i] != null)
-                {
-                    if (szachownica[this.pole_x, this.pole_y - i].kolor != this.kolor)
-                    {
-                        podswietlenia[this.pole_x, this.pole_y - i].Visibility = System.Windows.Visibility.Visible;
-                    }
-                    break;
-                }
-                podswietlenia[this.pole_x, this.pole_y - i].Visibility = System.Windows.Visibility.Visible;
-                i++;*/
             }
             i = 1;
+            //Sprawdzanie możliwych ruchów poziomo w lewo
             while (this.pole_x - i >= 0 && this.pole_x - i < 8)
             {
                 Figura pom = szachownica[this.pole_x - i, this.pole_y], pom2 = this;
@@ -159,18 +143,9 @@ namespace Szachy
                 }
 
                 i++;
-                /*if (szachownica[this.pole_x - i, this.pole_y] != null)
-                {
-                    if (szachownica[this.pole_x - i, this.pole_y].kolor != this.kolor)
-                    {
-                        podswietlenia[this.pole_x - i, this.pole_y].Visibility = System.Windows.Visibility.Visible;
-                    }
-                    break;
-                }
-                podswietlenia[this.pole_x - i, this.pole_y].Visibility = System.Windows.Visibility.Visible;
-                i++;*/
             }
             i = 1;
+            //Sprawdzanie możliwych ruchów pionowo w dół
             while (this.pole_y + i >= 0 && this.pole_y + i < 8)
             {
                 Figura pom = szachownica[this.pole_x, this.pole_y + i], pom2 = this;
@@ -214,6 +189,7 @@ namespace Szachy
                 i++;
             }
             i = 1;
+            //Sprawdzanie możliwych ruchów po przekątnej poziomo w prawo i pionowo w dół
             while (this.pole_x + i >= 0 && this.pole_x + i < 8 && this.pole_y + i >= 0 && this.pole_y + i < 8)
             {
                 Figura pom = szachownica[this.pole_x + i, this.pole_y + i], pom2 = this;
@@ -257,6 +233,7 @@ namespace Szachy
                 i++;
             }
             i = 1;
+            //Sprawdzanie możliwych ruchów po przekątnej poziomo w prawo i pionowo w górę
             while (this.pole_x + i >= 0 && this.pole_x + i < 8 && this.pole_y - i >= 0 && this.pole_y - i < 8)
             {
                 Figura pom = szachownica[this.pole_x + i, this.pole_y - i], pom2 = this;
@@ -299,6 +276,7 @@ namespace Szachy
                 i++;
             }
             i = 1;
+            //Sprawdzanie możliwych ruchów po przekątnej poziomo w lewo i pionowo w górę
             while (this.pole_x - i >= 0 && this.pole_x - i < 8 && this.pole_y - i >= 0 && this.pole_y - i < 8)
             {
                 Figura pom = szachownica[this.pole_x - i, this.pole_y - i], pom2 = this;
@@ -341,6 +319,7 @@ namespace Szachy
                 i++;
             }
             i = 1;
+            //Sprawdzanie możliwych ruchów po przekątnej poziomo w lewo i pionowo w dół
             while (this.pole_x - i >= 0 && this.pole_x - i < 8 && this.pole_y + i >= 0 && this.pole_y + i < 8)
             {
                 Figura pom = szachownica[this.pole_x - i, this.pole_y + i], pom2 = this;
@@ -383,132 +362,8 @@ namespace Szachy
                 i++;
             }
             return czy_mozliwe_ruchy;
-            /*if (szachownica[this.pole_x, this.pole_y + i] != null)
-            {
-                if (szachownica[this.pole_x, this.pole_y + i].kolor != this.kolor)
-                {
-                    podswietlenia[this.pole_x, this.pole_y + i].Visibility = System.Windows.Visibility.Visible;
-                }
-                break;
-            }
-            podswietlenia[this.pole_x, this.pole_y + i].Visibility = System.Windows.Visibility.Visible;
-            i++;*/
-
-            /*int i = 1;
-            while (this.pole_x + i >= 0 && this.pole_x + i < 8)
-            {
-                if (szachownica[this.pole_x + i, this.pole_y] != null)
-                {
-                    if (szachownica[this.pole_x + i, this.pole_y].kolor != this.kolor)
-                    {
-                        podswietlenia[this.pole_x + i, this.pole_y].Visibility = System.Windows.Visibility.Visible;
-                    }
-                    break;
-                }
-                podswietlenia[this.pole_x + i, this.pole_y].Visibility = System.Windows.Visibility.Visible;
-                i++;
-            }
-            i = 1;
-            while (this.pole_y - i >= 0 && this.pole_y - i < 8)
-            {
-                if (szachownica[this.pole_x, this.pole_y - i] != null)
-                {
-                    if (szachownica[this.pole_x, this.pole_y - i].kolor != this.kolor)
-                    {
-                        podswietlenia[this.pole_x, this.pole_y - i].Visibility = System.Windows.Visibility.Visible;
-                    }
-                    break;
-                }
-                podswietlenia[this.pole_x, this.pole_y - i].Visibility = System.Windows.Visibility.Visible;
-                i++;
-            }
-            i = 1;
-            while (this.pole_x - i >= 0 && this.pole_x - i < 8)
-            {
-                if (szachownica[this.pole_x - i, this.pole_y] != null)
-                {
-                    if (szachownica[this.pole_x - i, this.pole_y].kolor != this.kolor)
-                    {
-                        podswietlenia[this.pole_x - i, this.pole_y].Visibility = System.Windows.Visibility.Visible;
-                    }
-                    break;
-                }
-                podswietlenia[this.pole_x - i, this.pole_y].Visibility = System.Windows.Visibility.Visible;
-                i++;
-            }
-            i = 1;
-            while (this.pole_y + i >= 0 && this.pole_y + i < 8)
-            {
-                if (szachownica[this.pole_x, this.pole_y + i] != null)
-                {
-                    if (szachownica[this.pole_x, this.pole_y + i].kolor != this.kolor)
-                    {
-                        podswietlenia[this.pole_x, this.pole_y + i].Visibility = System.Windows.Visibility.Visible;
-                    }
-                    break;
-                }
-                podswietlenia[this.pole_x, this.pole_y + i].Visibility = System.Windows.Visibility.Visible;
-                i++;
-            }
-            i = 1;
-            while (this.pole_x + i >= 0 && this.pole_x + i < 8 && this.pole_y + i >= 0 && this.pole_y + i < 8)
-            {
-                if (szachownica[this.pole_x + i, this.pole_y + i] != null)
-                {
-                    if (szachownica[this.pole_x + i, this.pole_y + i].kolor != this.kolor)
-                    {
-                        podswietlenia[this.pole_x + i, this.pole_y + i].Visibility = System.Windows.Visibility.Visible;
-                    }
-                    break;
-                }
-                podswietlenia[this.pole_x + i, this.pole_y + i].Visibility = System.Windows.Visibility.Visible;
-                i++;
-            }
-            i = 1;
-            while (this.pole_x + i >= 0 && this.pole_x + i < 8 && this.pole_y - i >= 0 && this.pole_y - i < 8)
-            {
-                if (szachownica[this.pole_x + i, this.pole_y - i] != null)
-                {
-                    if (szachownica[this.pole_x + i, this.pole_y - i].kolor != this.kolor)
-                    {
-                        podswietlenia[this.pole_x + i, this.pole_y - i].Visibility = System.Windows.Visibility.Visible;
-                    }
-                    break;
-                }
-                podswietlenia[this.pole_x + i, this.pole_y - i].Visibility = System.Windows.Visibility.Visible;
-                i++;
-            }
-            i = 1;
-            while (this.pole_x - i >= 0 && this.pole_x - i < 8 && this.pole_y - i >= 0 && this.pole_y - i < 8)
-            {
-                if (szachownica[this.pole_x - i, this.pole_y - i] != null)
-                {
-                    if (szachownica[this.pole_x - i, this.pole_y - i].kolor != this.kolor)
-                    {
-                        podswietlenia[this.pole_x - i, this.pole_y - i].Visibility = System.Windows.Visibility.Visible;
-                    }
-                    break;
-                }
-                podswietlenia[this.pole_x - i, this.pole_y - i].Visibility = System.Windows.Visibility.Visible;
-                i++;
-            }
-            i = 1;
-            while (this.pole_x - i >= 0 && this.pole_x - i < 8 && this.pole_y + i >= 0 && this.pole_y + i < 8)
-            {
-                if (szachownica[this.pole_x - i, this.pole_y + i] != null)
-                {
-                    if (szachownica[this.pole_x - i, this.pole_y + i].kolor != this.kolor)
-                    {
-                        podswietlenia[this.pole_x - i, this.pole_y + i].Visibility = System.Windows.Visibility.Visible;
-                    }
-                    break;
-                }
-                podswietlenia[this.pole_x - i, this.pole_y + i].Visibility = System.Windows.Visibility.Visible;
-                i++;
-            }
-            return false;*/
         }
-        public Hetman(bool kolor, int pole_X, int pole_y, System.Windows.Controls.Button obiekt)
+        public Hetman(bool kolor, int pole_X, int pole_y, System.Windows.Controls.Button obiekt) //Konstruktor Hetmana
         {
             this.kolor = kolor;
             this.pole_x = pole_X;

@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace Szachy
 {
-    internal class Krol: Figura
+    internal class Krol: Figura //Klasa reprezentująca na szachownicy króla dziedzicząca po klasie Figura
     {
         public override bool mozliwe_ruchy(Figura[,] szachownica, System.Windows.Controls.Button[,] podswietlenia)
         {
             bool czy_mozliwe_ruchy = false;
+            //Sprawdzenie ruchów króla. Król może poruszać się o jedno pole w dowolnym kierunku (pod warunkiem że nie będzie szachowany)
             if(this.pole_x - 1>=0&& this.pole_y - 1>=0)
             {
+                //Sprawdzamy czy pole jest puste. Jeśli tak to sprawdzamy, czy po wykonaninu tego ruchu król będzie szachowany. Jeśli nie to ruch jest legalny i ujawniamy odpowiedni przycisk z tablicy podswietlenia
                 if (szachownica[this.pole_x - 1, this.pole_y - 1] == null)
                 {
                     Figura pom = szachownica[this.pole_x - 1, this.pole_y - 1], pom2 = this;
@@ -25,8 +27,8 @@ namespace Szachy
                     }
                     szachownica[this.pole_x - 1, this.pole_y - 1] = pom;
                     szachownica[this.pole_x, this.pole_y] = pom2;
-                    //podswietlenia[this.pole_x - 1, this.pole_y - 1].Visibility = System.Windows.Visibility.Visible;
                 }
+                //Jeśli pole jest zajmowane przez figurę o tym samym kolorze co nasz król to ruch jest nielegalny
                 else if (szachownica[this.pole_x - 1, this.pole_y - 1].kolor != this.kolor)
                 {
                     Figura pom = szachownica[this.pole_x - 1, this.pole_y - 1], pom2 = this;
@@ -39,7 +41,6 @@ namespace Szachy
                     }
                     szachownica[this.pole_x - 1, this.pole_y - 1] = pom;
                     szachownica[this.pole_x, this.pole_y] = pom2;
-                    //podswietlenia[this.pole_x - 1, this.pole_y - 1].Visibility = System.Windows.Visibility.Visible;
                 }
             }
             if (this.pole_y - 1 >= 0)
@@ -56,7 +57,6 @@ namespace Szachy
                     }
                     szachownica[this.pole_x, this.pole_y - 1] = pom;
                     szachownica[this.pole_x, this.pole_y] = pom2;
-                    //podswietlenia[this.pole_x, this.pole_y - 1].Visibility = System.Windows.Visibility.Visible;
                 }
                 else if (szachownica[this.pole_x, this.pole_y - 1].kolor != this.kolor)
                 {
@@ -70,7 +70,6 @@ namespace Szachy
                     }
                     szachownica[this.pole_x, this.pole_y - 1] = pom;
                     szachownica[this.pole_x, this.pole_y] = pom2;
-                    //podswietlenia[this.pole_x, this.pole_y - 1].Visibility = System.Windows.Visibility.Visible;
                 }
             }
             if(this.pole_x + 1<8&& this.pole_y - 1>=0)
@@ -87,7 +86,6 @@ namespace Szachy
                     }
                     szachownica[this.pole_x + 1, this.pole_y - 1] = pom;
                     szachownica[this.pole_x, this.pole_y] = pom2;
-                    //podswietlenia[this.pole_x + 1, this.pole_y - 1].Visibility = System.Windows.Visibility.Visible;
                 }
                 else if (szachownica[this.pole_x + 1, this.pole_y - 1].kolor != this.kolor)
                 {
@@ -101,7 +99,6 @@ namespace Szachy
                     }
                     szachownica[this.pole_x + 1, this.pole_y - 1] = pom;
                     szachownica[this.pole_x, this.pole_y] = pom2;
-                    //podswietlenia[this.pole_x + 1, this.pole_y - 1].Visibility = System.Windows.Visibility.Visible;
                 }
             }
             if (this.pole_x - 1 >= 0)
@@ -118,7 +115,6 @@ namespace Szachy
                     }
                     szachownica[this.pole_x - 1, this.pole_y] = pom;
                     szachownica[this.pole_x, this.pole_y] = pom2;
-                    //podswietlenia[this.pole_x - 1, this.pole_y].Visibility = System.Windows.Visibility.Visible;
                 }
                 else if (szachownica[this.pole_x - 1, this.pole_y].kolor != this.kolor)
                 {
@@ -132,7 +128,6 @@ namespace Szachy
                     }
                     szachownica[this.pole_x - 1, this.pole_y] = pom;
                     szachownica[this.pole_x, this.pole_y] = pom2;
-                    //podswietlenia[this.pole_x - 1, this.pole_y].Visibility = System.Windows.Visibility.Visible;
                 }
             }
             
@@ -150,7 +145,6 @@ namespace Szachy
                     }
                     szachownica[this.pole_x + 1, this.pole_y] = pom;
                     szachownica[this.pole_x, this.pole_y] = pom2;
-                    //podswietlenia[this.pole_x + 1, this.pole_y].Visibility = System.Windows.Visibility.Visible;
                 }
                 else if (szachownica[this.pole_x + 1, this.pole_y].kolor != this.kolor)
                 {
@@ -164,7 +158,6 @@ namespace Szachy
                     }
                     szachownica[this.pole_x + 1, this.pole_y] = pom;
                     szachownica[this.pole_x, this.pole_y] = pom2;
-                    //podswietlenia[this.pole_x + 1, this.pole_y].Visibility = System.Windows.Visibility.Visible;
                 }
             }
             if(this.pole_x - 1>=0&& this.pole_y + 1<8)
@@ -181,7 +174,6 @@ namespace Szachy
                     }
                     szachownica[this.pole_x - 1, this.pole_y + 1] = pom;
                     szachownica[this.pole_x, this.pole_y] = pom2;
-                    //podswietlenia[this.pole_x - 1, this.pole_y + 1].Visibility = System.Windows.Visibility.Visible;
                 }
                 else if (szachownica[this.pole_x - 1, this.pole_y + 1].kolor != this.kolor)
                 {
@@ -195,7 +187,6 @@ namespace Szachy
                     }
                     szachownica[this.pole_x - 1, this.pole_y + 1] = pom;
                     szachownica[this.pole_x, this.pole_y] = pom2;
-                    //podswietlenia[this.pole_x - 1, this.pole_y + 1].Visibility = System.Windows.Visibility.Visible;
                 }
             }
             if(this.pole_y + 1<8)
@@ -212,7 +203,6 @@ namespace Szachy
                     }
                     szachownica[this.pole_x, this.pole_y + 1] = pom;
                     szachownica[this.pole_x, this.pole_y] = pom2;
-                    //podswietlenia[this.pole_x, this.pole_y + 1].Visibility = System.Windows.Visibility.Visible;
                 }
                 else if (szachownica[this.pole_x, this.pole_y + 1].kolor != this.kolor)
                 {
@@ -226,7 +216,6 @@ namespace Szachy
                     }
                     szachownica[this.pole_x, this.pole_y + 1] = pom;
                     szachownica[this.pole_x, this.pole_y] = pom2;
-                    //podswietlenia[this.pole_x, this.pole_y + 1].Visibility = System.Windows.Visibility.Visible;
                 }
             }
             if (this.pole_x+1<8 && this.pole_y + 1 < 8)
@@ -243,7 +232,6 @@ namespace Szachy
                     }
                     szachownica[this.pole_x + 1, this.pole_y + 1] = pom;
                     szachownica[this.pole_x, this.pole_y] = pom2;
-                    //podswietlenia[this.pole_x + 1, this.pole_y + 1].Visibility = System.Windows.Visibility.Visible;
                 }
                 else if (szachownica[this.pole_x + 1, this.pole_y + 1].kolor != this.kolor)
                 {
@@ -257,9 +245,9 @@ namespace Szachy
                     }
                     szachownica[this.pole_x + 1, this.pole_y + 1] = pom;
                     szachownica[this.pole_x, this.pole_y] = pom2;
-                    //podswietlenia[this.pole_x + 1, this.pole_y + 1].Visibility = System.Windows.Visibility.Visible;
                 }
             }
+            //Sprawdzanie mozliwosci roszady. Jeśli król i odpowiednia wieża nie ruszyły się podczas partii, oraz nie znajdują się żadne figury między nimi, oraz król nie będzie przechodził przez pole, na którym byłby szachowany, to roszada jest możliwa
             if(this.czy_nie_wykonal_ruchu==true &&!this.czy_krol_szachowany(szachownica))
             {
                 Figura[,] pom = szachownica;
@@ -359,6 +347,7 @@ namespace Szachy
         public override bool czy_krol_szachowany(Figura[,] szachownica)
         {
             int i = 1;
+            //Sprawdzanie, czy król jest szachowany przez gońca lub hetmana
             while(this.pole_x+i<8 && this.pole_y+i<8)
             {
                 if(szachownica[this.pole_x+i,this.pole_y+i]!=null)
@@ -423,6 +412,7 @@ namespace Szachy
                 i++;
             }
             i = 1;
+            //Sprawdzanie, czy król jest szachowany przez wieżę lub hetmana.
             while (this.pole_x + i < 8)
             {
                 if (szachownica[this.pole_x + i, this.pole_y] != null)
@@ -487,6 +477,7 @@ namespace Szachy
                 i++;
             }
             i = 1;
+            //Sprawdzanie, czy król jest szachowany przez skoczka.
             if(this.pole_x+2<8)
             {
                 if(this.pole_y+1<8)
@@ -555,6 +546,7 @@ namespace Szachy
                     }
                 }
             }
+            //Sprawdzenie, czy król jest szachowany przez innego króla
             if(this.pole_x+1<8)
             {
                 if(this.pole_y+1<8 && szachownica[this.pole_x + 1, this.pole_y+1] != null && szachownica[this.pole_x+1,this.pole_y+1].GetType()==typeof(Krol))
@@ -593,6 +585,7 @@ namespace Szachy
                     return true;
                 }
             }
+            //Sprawdzenie czy król jest szachowany przez pionka
             if(this.kolor==true)
             {
                 if(this.pole_y-1>=0)

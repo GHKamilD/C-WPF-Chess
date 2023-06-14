@@ -8,20 +8,9 @@
         xmlns:local="clr-namespace:Szachy"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Window.Resources>
-        <Image x:Key="HetmanB" Source="Zdjecia/Hetman_B.png"></Image>
-        <Image x:Key="HetmanC" Source="Zdjecia/Hetman_C.png"></Image>
-        <Image x:Key="WiezaB" Source="Zdjecia/Wieza_B.png"></Image>
-        <Image x:Key="WiezaC" Source="Zdjecia/Wieza_C.png"></Image>
-        <Image x:Key="GoniecB" Source="Zdjecia/Goniec_B.png"></Image>
-        <Image x:Key="GoniecC" Source="Zdjecia/Goniec_C.png"></Image>
-        <Image x:Key="SkoczekB" Source="Zdjecia/Skoczek_B.png"></Image>
-        <Image x:Key="SkoczekC" Source="Zdjecia/Skoczek_C.png"></Image>
-    </Window.Resources>
     <Canvas x:Name="Plansza">
         <Border BorderBrush="Black" BorderThickness="1" Canvas.Left="218" Canvas.Top="17" Height="400" Width="400" HorizontalAlignment="Center" VerticalAlignment="Top"></Border>
         <Grid  Width="400" Height="400" Canvas.Left="218" Canvas.Top="17" x:Name="siatka">
-
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="50" x:Name="kolumna" />
                 <ColumnDefinition Width="50" />
@@ -78,6 +67,7 @@
             <Border Grid.Column="7" Grid.Row="6" Background="SaddleBrown" />
 
         </Grid>
+
         <Button x:Name="Pionek1" Width="50" Height="50" Background="Transparent" BorderThickness="0" Canvas.Left="268" Canvas.Top="317" Click="Pionek0_Click_1" HorizontalAlignment="Center" VerticalAlignment="Top">
             <Image x:Name="Zdjecie_pionek1" Source="Zdjecia\Pionek_B.png" Width="43" Height="43"></Image>
         </Button>
@@ -238,8 +228,7 @@
         <Button x:Name="pole62" Opacity="0.5" Background="Red" Canvas.Left="468" Canvas.Top="17" Width="50" Height="50" Visibility="Hidden" Click="pole2_Click"></Button>
         <Button x:Name="pole63" Opacity="0.5" Background="Red" Canvas.Left="518" Canvas.Top="17" Width="50" Height="50" Visibility="Hidden" Click="pole2_Click"></Button>
         <Button x:Name="pole64" Opacity="0.5" Background="Red" Canvas.Left="568" Canvas.Top="17" Width="50" Height="50" Visibility="Hidden" Click="pole2_Click"></Button>
-        <Label x:Name="testing" Content="BRUHHHHHHHHHHH" FontSize="50" Visibility="Hidden"></Label>
-        <Label x:Name="testing1" Content="PAAAAAAAAAAAT" FontSize="50" Visibility="Hidden"></Label>
+
         <Grid x:Name="Ekran_Startowy" Visibility="Visible" Width="800" Height="424" Canvas.Top="0" Canvas.Left="0" HorizontalAlignment="Center" VerticalAlignment="Top" Background="White">
             <Button x:Name="Wznowienie" Margin="263,82,263,255" Content="Wznów" Background="SaddleBrown" Foreground="White" Click="Wznowienie_Click"></Button>
             <Button x:Name="Start" Margin="263,169,263,168" Content="Nowa gra" Background="Beige" Foreground="Black" Click="Start_Click"></Button>
@@ -261,19 +250,15 @@
         </Grid>
         <Grid x:Name="Wygrana_bialych" Width="800" Height="424" Background="White" Visibility="Hidden" Opacity="0.7">
             <Label Content="Mat. Wygrana Białych" Margin="99,58,99,279" FontSize="50" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-            <Button x:Name="Start2" Margin="652,270,52,67" Background="White" Foreground="Black" Click="Powrot_Click" BorderThickness="0">
-                <Image Source="Zdjecia/return.png"></Image>
-            </Button>
         </Grid>
         <Grid x:Name="Wygrana_czarnych" Width="800" Height="424" Background="White" Visibility="Hidden" Opacity="0.7">
             <Label Content="Mat. Wygrana Czarnych" Margin="99,58,99,279" FontSize="50" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-            <Button x:Name="Start3" Margin="652,270,52,67" Background="White" Foreground="Black" BorderThickness="0" Click="Powrot_Click">
-                <Image Source="Zdjecia/return.png"></Image>
-            </Button>
         </Grid>
         <Grid x:Name="Remis" Width="800" Height="424" Background="White" Visibility="Hidden" Opacity="0.7">
             <Label Content="Remis." Margin="99,58,99,279" FontSize="60" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-            <Button x:Name="Start4" Margin="652,270,52,67" Background="White" Foreground="Black" BorderThickness="0" Click="Powrot_Click">
+        </Grid>
+        <Grid Height="67" Width="64" Canvas.Left="685" Canvas.Top="275">
+            <Button x:Name="powrot" Background="White" Foreground="Black" BorderThickness="0" Click="Powrot_Click" Visibility="Hidden">
                 <Image Source="Zdjecia/return.png"></Image>
             </Button>
         </Grid>

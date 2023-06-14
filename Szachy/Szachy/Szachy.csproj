@@ -102,9 +102,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="kisspng-chess-piece-pawn-white-and-black-in-chess-king-5ae7032c424413.7230730515250890682714.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Zdjecia\Pionek_C.png" />
   </ItemGroup>
   <ItemGroup>
@@ -137,9 +134,6 @@
   <ItemGroup>
     <Resource Include="Zdjecia\Hetman_B.png" />
     <Resource Include="Zdjecia\Skoczek_C.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="pomocy.txt" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
